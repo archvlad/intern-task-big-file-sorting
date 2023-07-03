@@ -20,7 +20,7 @@ async function externSort(fileName) {
         size += line.length;
         v.push(parseFloat(line));
         if (size > MAX_MEM_USE) {
-            console.log("here", v.length, "elements", size, "bytes");
+            console.log("sorting", v.length, "elements", size, "bytes");
             await sortAndWriteToFile(v, tmpFileNames);
             size = 0;
         }
@@ -42,7 +42,6 @@ async function merge(tmpFileNames, fileName) {
     const file = createWriteStream(resultFileName, {
         highWaterMark: BUFFER_CAPACITY,
     });
-    console.log("here");
     const activeReaders = tmpFileNames.map((name) =>
         readline
             .createInterface({
