@@ -5,14 +5,7 @@ const readline = require("readline");
 
 const BUFFER_CAPACITY = 1_000;
 const MAX_MEM_USE = 8_000_00;
-const FILE_SIZE = 20000000000;
-
-(async function () {
-    const fileName = "logistic-chaos.txt";
-    // await createLargeFile(fileName);
-    // console.log("Created large file");
-    await externSort(fileName);
-})();
+const FILE_NAME = "data.txt";
 
 async function externSort(fileName) {
     const file = createReadStream(fileName, { highWaterMark: BUFFER_CAPACITY });
@@ -100,25 +93,4 @@ async function sortAndWriteToFile(v, tmpFileNames) {
     console.log("written");
 }
 
-function createLargeFile(fileName) {
-    console.log("Creating large file ...");
-    return pipeline(
-        logistic(0.35),
-        createWriteStream(fileName, { highWaterMark: BUFFER_CAPACITY })
-    );
-}
-
-function* logistic(x) {
-    let readBytes = 0;
-    let lastLog = 0;
-    while (readBytes < FILE_SIZE) {
-        x = 3.7 * x * (1.0 - x);
-        const data = `${x}\n`;
-        readBytes += data.length;
-        if (readBytes - lastLog > 1_000_000) {
-            console.log(`${readBytes / 1_000_000.0}mb`);
-            lastLog = readBytes;
-        }
-        yield data;
-    }
-}
+externSort(FILE_NAME);
