@@ -15,4 +15,4 @@ const FILE_NAME = "data.txt"; // Файл для сортировки
 
 Может появиться проблема `too many open files` из-за ограничений на количество открытых файловых дескрипторов у процесса. Решение можно найти [тут](https://sysadminium.ru/adm-serv-linux-limit-open-files-sysctl/).
 
-
+Для подобных задач также существуют несколько NPM пакетов, один из них: [external-sorting](https://www.npmjs.com/package/external-sorting).
